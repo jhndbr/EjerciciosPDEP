@@ -2,7 +2,7 @@ import example.*
 class Gamer{
 	const property nombre 
 	var property dinero = 10000
-	
+	const property propiedades = []
 	
 	method puedepagar(suma) {
     return dinero >= suma
@@ -15,7 +15,6 @@ class Gamer{
 }
 
 class Jugador inherits Gamer {
-  const property propiedades = []
   var property casilleroActual = 0
 
   
@@ -46,13 +45,18 @@ class Jugador inherits Gamer {
     // Después de recorrer todos los casilleros, actualiza el casillero actual.
     
 	}
+	method agregarPropiedad(unapropiedad){
+		propiedades.add(unapropiedad)
+	}
 	
-	
+	method cuantasEmpresas() {
+		return propiedades.filter({propiedad=>propiedad.sosEmpresa()}).size()
+	}
 	}
 	
 	object dado{
 	const property numerosdado = [1, 2, 3, 4, 5, 6]
 	 method Tirardado(){
-		return numerosdado.anyOne()
+		return numerosdado.anyOne() + numerosdado.anyOne()
 	}
 }

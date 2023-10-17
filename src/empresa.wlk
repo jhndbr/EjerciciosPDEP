@@ -9,8 +9,7 @@ class Empresa inherits Propiedad {
 
   method sosEmpresa() = true
 
-
   method rentaPara(jugadorQueCayo) {
-    return jugadorQueCayo.tirarDados() * 30000 * cantidadEmpresas
+    return jugadorQueCayo.tirarDados() * 30000 * self.duenioes().cuantasEmpresas()
   }
 }

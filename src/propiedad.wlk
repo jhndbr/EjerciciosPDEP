@@ -39,6 +39,7 @@ class Campo inherits Propiedad{
  method costoconstruir()=costoConstruccionEstancia 
  method instanciasconstruidas()=estanciasConstruidas 
  method sosEmpresa() = false
+ 
  method rentaPara(jugadorQueCayo) {
   return estanciasConstruidas * (2**estanciasConstruidas * valorRentaFijo)
 }
@@ -48,10 +49,11 @@ class Campo inherits Propiedad{
    	if(laprovincia.sepuedeconstruir()){
    		estanciasConstruidas =+ 1
    		duenio.pagarAcreedor(costoConstruccionEstancia)
-   		BANCO.recibirpago(costoConstruccionEstancia)
+   		BANCO.recibirPago(costoConstruccionEstancia)
    	}
   }
 }
+
 
 
 
