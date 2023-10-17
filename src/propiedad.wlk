@@ -1,17 +1,19 @@
 import example.*
 import jugador.*
 import campo.*
+import empresa.*
+
+const BANCO = new Banco(nombre = "Banco")
+
 class Propiedad {
-  const property duenio = new Banco(nombre = "Banco")
-   method duenioes() = duenio.nombrees()
-//  method esduenio(elduenio){
-//  	return duenio == elduenio
-//  }
-  
-//  method deuniobanco(unjugador){
-//		unjugador.pagaracreedor(precioinicial)
-//		duenio.recibirpago(precioinicial)
-//	}
+	const property duenio = BANCO
+ 	
+ 	method asignarduenio(){
+ 		if (duenio!=null){
+ 			
+ 		}
+ 	}
+ 	method duenioes() = duenio.nombrees()
 //  method rentapara(jugadorquecayo) {
 //    return 0
 //  }
@@ -20,7 +22,8 @@ class Propiedad {
 //  	} 
 //  	}
 //  	
-}
+	}
+
 class Banco inherits Gamer {
 	method hacerquecompre(){
 	
@@ -28,21 +31,67 @@ class Banco inherits Gamer {
 }
 
 class Campo inherits Propiedad{
-	
   const property precioinicial = 1
   const property valorRentaFijo = 3000
-  const property costoEstancia = 1000
-//  var property estanciasConstruidas = 0
-//  
-//  
-//  method instancias()=estanciasConstruidas 
-//  
-//  method rentaPara(jugadorQueCayo) {
-//    return estanciasConstruidas * (2**estanciasConstruidas * valorRentaFijo)
-//  }
-//  
-//
-//  method construirEstancia() {
-//    Implementa la lógica de construcción de estancias aquí
-//  }
+  const property costoConstruccionEstancia = 1000
+  var property estanciasConstruidas = 0
+  
+ method costoconstruir()=costoConstruccionEstancia 
+ method instanciasconstruidas()=estanciasConstruidas 
+ method sosEmpresa() = false
+ method rentaPara(jugadorQueCayo) {
+  return estanciasConstruidas * (2**estanciasConstruidas * valorRentaFijo)
 }
+  
+
+ method construirEstanciaen(laprovincia) {
+   	if(laprovincia.sepuedeconstruir()){
+   		estanciasConstruidas =+ 1
+   		duenio.pagarAcreedor(costoConstruccionEstancia)
+   		BANCO.recibirpago(costoConstruccionEstancia)
+   	}
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

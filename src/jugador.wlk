@@ -2,6 +2,8 @@ import example.*
 class Gamer{
 	const property nombre 
 	var property dinero = 10000
+	
+	
 	method puedepagar(suma) {
     return dinero >= suma
 	}
