@@ -1,4 +1,8 @@
+import example.*
+import jugador.*
 import propiedad.*
+import empresa.*
+
 object provincia {
 	const property campos = []
 	method agregarcampo(campo){
@@ -17,9 +21,9 @@ object provincia {
 
 
 	method construccionpareja (campoconstruir){
-		return campoconstruir.instanciasconstruidas() <= campos.lamenorinstanciadelaprovincia().instanciasconstruidas()
-		
+		return campoconstruir.instanciasconstruidas() <= self.lamenorinstanciadelaprovincia().instanciasconstruidas()
 	}
+	
 	method lamenorinstanciadelaprovincia(){
 	return  (campos.sortedBy({ campo1, campo2 => 
 	campo1.instanciasconstruidas() < campo2.instanciasconstruidas()})).first()
@@ -30,4 +34,25 @@ object provincia {
 	}
 	}
 
-	
+class Campo inherits Propiedad{
+  const property valorRentaFijo = 3000
+  const property costoConstruccionEstancia = 1000
+  var property estanciasConstruidas = 0
+  
+ method costoconstruir()=costoConstruccionEstancia 
+ method instanciasconstruidas()=estanciasConstruidas 
+ method sosEmpresa() = false
+ 
+ method rentaPara(jugadorQueCayo) {
+  return estanciasConstruidas * (2**estanciasConstruidas * valorRentaFijo)
+}
+  
+// esta bien aca, o rompe encapsulamiento
+ method construirEstanciaen(laprovincia,campoconstruir) {
+   	if(laprovincia.sepuedeconstruir(campoconstruir)){
+   		estanciasConstruidas =+ 1
+   		duenio.pagarAcreedor(costoConstruccionEstancia)
+   		BANCO.recibirPago(costoConstruccionEstancia)
+   	}
+  }
+}

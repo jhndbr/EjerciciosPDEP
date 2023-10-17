@@ -10,21 +10,37 @@ class Gamer{
  	method recibirPago(pago) {
 		dinero += pago
 	}
-	
+	method hacerpago(pago) {
+		dinero += pago
+	}
 	method nombrees()=nombre
+	
+	method pagarAcreedor(alguien,suma){
+    if (self.puedepagar(suma)){
+        self.hacerpago(suma)
+        alguien.recibirpago(suma)
+    } else {
+        throw "No tienes suficiente dinero para pagar."
+    }
+	}
+	method agregarPropiedad(unapropiedad){
+		propiedades.add(unapropiedad)
+	}
+	
+	method cuantasEmpresas() {
+		return propiedades.filter({propiedad=>propiedad.sosEmpresa()}).size()
+	} 
+	method esmipropiedad(unaPropiedad){
+		propiedades.contains(unaPropiedad)
+	}
+	
 }
+
+	
 
 class Jugador inherits Gamer {
   var property casilleroActual = 0
 
-  
- 	method pagarAcreedor(suma){
-    if (self.puedepagar(suma)){
-        dinero -= suma
-    } else {
-        throw "No tienes suficiente dinero para pagar."
-    }
-	} 
 	
 	method casilleroactual()= casilleroActual
 
@@ -38,20 +54,14 @@ class Jugador inherits Gamer {
  
 	method tirodado(dado){dado.Tirardado()}
 	
-	method moverseSobreCasilleros(casillerosAMoverse) {
-    casillerosAMoverse.forEach { casillero =>
-      self.paso(casillero)
-    }
-    // Después de recorrer todos los casilleros, actualiza el casillero actual.
-    
-	}
-	method agregarPropiedad(unapropiedad){
-		propiedades.add(unapropiedad)
-	}
+//	method moverseSobreCasilleros(casillerosAMoverse) {
+//    casillerosAMoverse.forEach { casillero =>
+//      self.paso(casillero)
+//    }
+//    // Después de recorrer todos los casilleros, actualiza el casillero actual.
+//    
+//	}
 	
-	method cuantasEmpresas() {
-		return propiedades.filter({propiedad=>propiedad.sosEmpresa()}).size()
-	}
 	}
 	
 	object dado{
@@ -59,4 +69,11 @@ class Jugador inherits Gamer {
 	 method Tirardado(){
 		return numerosdado.anyOne() + numerosdado.anyOne()
 	}
+}
+
+class Banco inherits Gamer {
+	method hacerquecompre(unJugador,unaPropiedad){
+	unJugador.pagarAcreedor(self,unaPropiedad.precioinicialpropiedad())
+	unJugador.agregarPropiedad(unaPropiedad)
+	}	
 }

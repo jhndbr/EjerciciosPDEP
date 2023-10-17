@@ -1,4 +1,10 @@
-// Definición de las clases
+
+import jugador.*
+import campo.*
+import propiedad.*
+import jugador.*
+import campo.*
+import empresa.*
 
 class Juego {
   const property jugadores = []
@@ -31,13 +37,34 @@ class Tablero {
 }
 
 class Casillero {
+	const tipo
 	const property numero
     method obtenerNumero() {
       return numero
    }
+   
+   method paso(unJugador){
+   	if(self.tipocasillero() == "salida" ){
+   		unJugador.hacerpago(5000)
+   	}
+   	
+   }
+   
+   method tipocasillero()=tipo
+
+   
+   
 }
 
-class PremioGanadero {}
+class PremioGanadero inherits Casillero{
+	method cayo(unJugador){
+		unJugador.recibipago(2500)
+	}
+}
 
-class Salida {}
+class Salida inherits Casillero {
+	method cayo(unJugador){
+		
+	}
+}
 
