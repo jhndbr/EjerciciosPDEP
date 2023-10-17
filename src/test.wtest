@@ -1,26 +1,6 @@
 import example.*
 import jugador.*
 import propiedad.*
-
-object provincia {
-const property campos = [
-  { duenio: new Jugador("Juan") },
-  { duenio: new Jugador("Pedro") },
-  { duenio: new Jugador("Marta") },
-  { duenio: new Jugador("Maria") },
-  { duenio: new Jugador("Jose") }
-]
-}
-
-
-
-
-const juga1 = new Jugador()
-const juga2 = new Jugador()
-const juga3 = new Jugador()
-const juga4 = new Jugador()
-
-var campo1 = new Campo(duenio=juga1)
-var campo2 = new Campo(duenio=juga2)
-var campo3 = new Campo(duenio=juga3)
-var campo4 = new Campo(duenio=juga4)
+import campo.*
+import empresa.*
+import provincia.*
