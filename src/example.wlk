@@ -17,8 +17,8 @@ class Juego {
 	}
 
 	method queJuegue(unJugador) {
-		unJugador.moverseSobreCasilleros(unJugador.tirarDado())
-		unJugador.cayo(unJugador.casilleroactual())
+		unJugador.moverseSobreCasilleros(unJugador.tirodado(DADOS))
+		//unJugador.cayo(unJugador.casilleroactual())
 	}
 
 }
@@ -41,36 +41,40 @@ class Tablero {
 }
 
 class Casillero {
-
-	const tipo
-	const property numero
-
-	method obtenerNumero() {
-		return numero
-	}
-
+	
 	method paso(unJugador) {
-		if (self.tipocasillero() == "salida") {
-			unJugador.hacerpago(5000)
 		}
+	
+	method cayo(unJugador){
+		
 	}
+}
 
-	method tipocasillero() = tipo
-
+class CasilleroPropiedad inherits Casillero{
+	var property propiedadencasillero
+	 method propiedadCasillero() {
+		return propiedadencasillero
+	}
+	override method cayo(unJugador){
+		
+	}
+	
 }
 
 class PremioGanadero inherits Casillero {
 
-	method cayo(unJugador) {
-		unJugador.recibipago(2500)
+	override method cayo(unJugador) {
+		unJugador.recibirPago(2500)
 	}
 
 }
 
 class Salida inherits Casillero {
 
-	method cayo(unJugador) {
+	override method cayo(unJugador) {
 	}
-
+	override method paso(unJugador) {
+			unJugador.hacerpago(5000)
+	}
 }
 

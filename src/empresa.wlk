@@ -10,22 +10,10 @@ class Empresa inherits Propiedad {
   
   method sosEmpresa() = true
   
-  method rentaPara(jugadorQueCayo) {
-    return jugadorQueCayo.tirarDados() * 30000 * self.dueniopropiedad().cuantasEmpresas()
+  override method rentaPara(jugadorQueCayo) {
+    return   self.dueniopropiedad().cuantasEmpresas()*3000
   }
-  
-  method cayo(unJugador){
-   		if(self.tipocasillero() == "propiedad"  ){
-   			if(self.dueniopropiedad() == BANCO){
-   			BANCO.hacerquecompre(unJugador,self)
-   			}
-   		else if (self.dueniopropiedad() == unJugador.esmipropiedad(self)){
-   			
-   			}
-   		else{
-   			unJugador.pagarAcreedor(self.dueniopropiedad(),self.rentaPara(unJugador))
-   			}
-   			} 
-   		else {}
-   }  
+  method cantempresas3(){
+  	return self.dueniopropiedad().cuantasEmpresas()*3000
+  }
 }

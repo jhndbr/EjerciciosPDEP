@@ -1,0 +1,22 @@
+	var chaco = provincia
+	var campo1 = new Campo (miprovincia = chaco)
+	var campo2 = new Campo (miprovincia = chaco)
+	var campo3 = new Campo (miprovincia = chaco)
+	var campo4 = new Campo (miprovincia = chaco)
+	var campo5 = new Campo (miprovincia = chaco)
+	var campo6 = new Campo (miprovincia = chaco)
+	var empresa7 = new Empresa()
+	var empresa8 = new Empresa()
+	var casillero1 = new CasilleroPropiedad (propiedadencasillero=campo1)
+	var casillero2 = new CasilleroPropiedad (propiedadencasillero=campo2)
+	var casillero3 = new CasilleroPropiedad (propiedadencasillero=campo3)
+	var casillero4 = new CasilleroPropiedad (propiedadencasillero=campo4)
+	var casillero5 = new CasilleroPropiedad (propiedadencasillero=campo5)
+	var casillerosparatablero =[casillero1,casillero2,casillero3,casillero4]
+	var UNTABLERO = new Tablero(casilleros = casillerosparatablero)
+	var tito = new Jugador (nombre ="tito",casilleroActual = campo1, estrategiaDeCompra = standard)
+	
+	var movercantidadcasilleros
+	movercantidadcasilleros = tito.tirodado()
+	tito.moversesobretablero(UNTABLERO.casillerosTablero().subList(tito.posicionactuales(),tito.posicionactuales()+movercantidadcasilleros))
+	}

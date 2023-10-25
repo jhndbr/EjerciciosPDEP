@@ -6,28 +6,31 @@ class Gamer {
 	var property dinero = 10000
 	const property propiedades = []
 
-	method puedepagar(suma) {
-		return dinero >= suma
-	}
-
-	method recibirPago(pago) {
+method recibirPago(pago) {
 		dinero += pago
 	}
-
-	method hacerpago(pago) {
-		dinero += pago
-	}
-
-	method nombrees() = nombre
-
-	method pagarAcreedor(alguien, suma) {
+method pagarAcreedor(alguien, suma) {
 		if (self.puedepagar(suma)) {
 			self.hacerpago(suma)
-			alguien.recibirpago(suma)
+			alguien.recibirPago(suma)
 		} else {
 			throw "No tienes suficiente dinero para pagar."
 		}
 	}
+
+	method puedepagar(suma) {
+		return dinero >= suma
+	}
+
+method hacerpago(pago) {
+		dinero += pago
+	}	
+
+	
+
+	method nombrees() = nombre
+
+	
 
 	method agregarPropiedad(unapropiedad) {
 		propiedades.add(unapropiedad)
@@ -42,7 +45,7 @@ class Gamer {
 	}
 
 }
-
+	
 class Jugador inherits Gamer {
 
 	var property casilleroActual = 0
@@ -65,7 +68,7 @@ class Jugador inherits Gamer {
 		casillerosAMoverse.reverse().drop(1).forEach{ casillero => self.paso(casillero)}
 		casillerosAMoverse.reverse().take(1).forEach{ casillero => self.cayo(casillero)}
 			// Después de recorrer todos los casilleros, actualiza el casillero actual.
-		casilleroActual = +casillerosAMoverse.size()
+		casilleroActual =+ casillerosAMoverse.size()
 	}
 
 }
@@ -77,8 +80,8 @@ object dado {
 	method Tirardado() {
 		return numerosdado.anyOne() + numerosdado.anyOne()
 	}
-
 }
+const DADOS = dado
 
 class Banco inherits Gamer {
 

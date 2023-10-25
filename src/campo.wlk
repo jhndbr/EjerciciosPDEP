@@ -12,7 +12,7 @@ class Campo inherits Propiedad{
 	 method instanciasconstruidas()=estanciasConstruidas 
  	method sosEmpresa() = false
  
-	method rentaPara(jugadorQueCayo) {
+	override method rentaPara(jugadorQueCayo) {
  		 return estanciasConstruidas * (2**estanciasConstruidas * valorRentaFijo)
 	}
   
@@ -20,24 +20,10 @@ class Campo inherits Propiedad{
  	method construirEstanciaen(laprovincia,campoconstruir) {
    		if(laprovincia.sepuedeconstruir(campoconstruir)){
    		estanciasConstruidas =+ 1
-   		self.dueniopropiedad().pagarAcreedor(costoConstruccionEstancia)
-   		BANCO.recibirPago(costoConstruccionEstancia)
+   		self.dueniopropiedad().pagarAcreedor(BANCO,costoConstruccionEstancia)
    		}
   	}
   
-	method cayo(unJugador){
-   		if(self.tipocasillero() == "propiedad"  ){
-   			if(self.dueniopropiedad() == BANCO){
-   			BANCO.hacerquecompre(unJugador,self)
-   			}
-   		else if (self.dueniopropiedad() == unJugador.esmipropiedad(self)){
-   			
-   			}
-   		else{
-   			unJugador.pagarAcreedor(self.dueniopropiedad(),self.rentaPara(unJugador))
-   			}
-   			} 
-   		else {}
-   	}  
+	
 }
   
