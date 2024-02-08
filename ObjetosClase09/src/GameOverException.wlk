@@ -1,1 +1,0 @@
-class GameOverException inherits DomainException(message = "GAME OVER!!!!") {}
