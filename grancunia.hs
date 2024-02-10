@@ -1,5 +1,3 @@
-
--- Definición de tipos de datos
 data Participante = Participante {
     nombre :: String,
     edad :: Int,
