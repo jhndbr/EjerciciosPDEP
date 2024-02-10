@@ -17,7 +17,7 @@ nivelDePeligrosidad (Fantasma poder _) = poder * 20
 
 puedeDerrotar :: Persona -> Criatura -> Bool
 puedeDerrotar _ Siempredetras = False
-puedeDerrotar persona (Gnomos _) = elem SopladorDeHojas (items persona)
+puedeDerrotar persona (Gnomos _) = elem SopladorDeHojas (items persona) --aca faltaria delegar a otra funcion
 puedeDerrotar persona (Fantasma _ condicion) = condicion persona
 
 enfrentamientoEntre :: Persona -> Criatura -> Persona
