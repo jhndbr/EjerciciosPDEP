@@ -1,0 +1,1 @@
+forall (materia(Materia, Anio), aprobo(Alumno, Materia)).
