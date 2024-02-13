@@ -23,9 +23,9 @@ modificarAspecto f aspecto = aspecto { grado = f (grado aspecto) }
 esMejor :: Situacion -> Situacion -> Bool
 esMejor s1 s2 = all esMejorAspecto (zip ( s1) ( s2))
     where esMejorAspecto (a1, a2) = tipoDeAspecto a1 == tipoDeAspecto a2 && grado a1 > grado a2m 
-
+---esto esta mal creo
 modificarSituacion :: Situacion -> String -> (Float -> Float) -> Situacion
-modificarSituacion (Situacion aspectos) nombreAspecto f = Situacion (map modificarAspecto aspectos)
+modificarSituacion (situacion aspectos) nombreAspecto f = Situacion (map modificarAspecto aspectos)
     where modificarAspecto aspecto
             | nombre aspecto == nombreAspecto = aspecto { grado = f (grado aspecto) }
             | otherwise = aspecto
