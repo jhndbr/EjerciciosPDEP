@@ -30,3 +30,19 @@ maximoSegun f = foldl1 (mayorSegun f)
 mayorSegun f a b
   | f a > f b = a
   | otherwise = b
+
+-- PUNTO 1
+putter :: Palo
+putter habilidad = UnTiro { velocidad = 10, precision = 2 * precisionJugador habilidad, altura = 0 }
+
+madera :: Palo
+madera habilidad = UnTiro { velocidad = 100, precision = precisionJugador habilidad `div` 2, altura = 5 }
+
+hierro :: Int -> Palo
+hierro n habilidad = UnTiro { velocidad = fuerzaJugador habilidad * n, precision = precisionJugador habilidad `div` n, altura = max 0 (n - 3) }
+
+--semantica Habilidad -> Tiro
+type Palo = Habilidad -> Tiro
+-- esto tipa osea podemos declararlos es importante para el parcial pueden pedir algo similar
+palos :: [Palo]
+palos = [putter, madera] ++ map hierro [1..10]   
