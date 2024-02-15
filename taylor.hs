@@ -48,8 +48,6 @@ escucharCancion cancion persona =
     Persona { estadoDeAnimo = cancion persona, tiempoLibre = tiempoLibre persona - 1 }
 
 
-type Categoria = Persona -> Persona
-
 -- Definimos algunas canciones
 cancion1 :: Cancion
 cancion1 = Cancion { duracion = 5, categoria = musicaClasica }
