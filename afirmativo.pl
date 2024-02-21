@@ -76,7 +76,6 @@ puntos(asuntosInternos(AgenteInvestigado), Puntos) :-
     puntuacion(AgenteInvestigado, PuntuacionInvestigado),
     Puntos is PuntuacionInvestigado * 2.
 
-
 puntuacion(Agente, Puntuacion) :-
     tarea(Agente, _, _),
     findall(Puntos, (tarea(Agente, Tarea, _), puntos(Tarea, Puntos)), ListaPuntos),

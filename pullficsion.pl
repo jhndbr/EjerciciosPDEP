@@ -7,8 +7,8 @@ personaje(winston,    mafioso(resuelveProblemas)).
 personaje(mia,        actriz([foxForceFive])).
 personaje(butch,      boxeador).
 
-pareja(marsellus, mia).
-pareja(pumkin,    honeyBunny).
+pareja(marsellus,mia).
+pareja(pumkin,honeyBunny).
 
 
 trabajaPara(marsellus, vincent).
