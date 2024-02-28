@@ -6,11 +6,10 @@ class Empleado {
 
 	method saludCritica()
 	method tengohabilidad(unaHabilidad)
-	method HacerMision(unaMision) {
-	}
+	method HacerMision(unaMision) 
 
 	method estoyIncapacitado() {
-		return saludActual > self.saludCritica()
+		return saludActual < self.saludCritica()
 	}
 	method puedeUsarHabilidad(unaHabilidad){
 		return not self.estoyIncapacitado() && self.tengohabilidad(unaHabilidad)
@@ -42,9 +41,7 @@ class Espias inherits Empleado {
 
 	override method HacerMision(unaMision) {
 	}
-	override method tengohabilidad(unaHabilidad){
-		return habilidades.contains(unaHabilidad)
-	}
+	
 }
 
 class Oficinista inherits Empleado {
@@ -74,7 +71,7 @@ class Jefe inherits Empleado {
 		return habilidades.contains(unaHabilidad) || subordinados.any({empleado=>empleado.tengoHabiliad(unaHabilidad)})
 	}
 }
-
+// consultar por logica repetida en este punto como se podria solucionar o es algo que puede pasar sin problema
 object equipo {
 const property empleadosvarios = #{}
 
