@@ -14,27 +14,62 @@ atiende(vale, Dia, HorarioInicio, HorarioFinal):-atiende(dodain, Dia, HorarioIni
 atiende(vale, Dia, HorarioInicio, HorarioFinal):-atiende(juanC, Dia, HorarioInicio, HorarioFinal).
 %esta mal agregar algo que no sabemos, asi que no se agrega
 
-atiendeEn(Persona, Dia, Hora) :-
-    atiende(Persona, dia(Dia, HoraInicio, HoraFin)),
-    between(HoraInicio, HoraFin, Hora).
+% Definir la relación para asociar cada persona con el rango horario que cumple, e incorporar las siguientes cláusulas:
+% - vale atiende los mismos días y horarios que dodain y juanC.
+atiende(vale, Dia, HorarioInicio, HorarioFinal):-atiende(dodain, Dia, HorarioInicio, HorarioFinal).
+atiende(vale, Dia, HorarioInicio, HorarioFinal):-atiende(juanC, Dia, HorarioInicio, HorarioFinal).
 
-atiendeSolo(Persona, Dia, Hora) :-
-    atiendeEn(Persona, Dia, Hora),
-    not((atiendeEn(OtraPersona, Dia, Hora), OtraPersona \= Persona)).
+% - nadie hace el mismo horario que leoC
+% por principio de universo cerrado, no agregamos a la base de conocimiento aquello que no tiene sentido agregar
+% - maiu está pensando si hace el horario de 0 a 8 los martes y miércoles
+% por principio de universo cerrado, lo desconocido se presume falso
+% 
+% En caso de no ser necesario hacer nada, explique qué concepto teórico está relacionado y justifique su respuesta.
 
+% Punto 2: quién atiende el kiosko... (2 puntos)
+% Definir un predicado que permita relacionar un día y hora con una persona, en la que dicha persona atiende el
+% kiosko. Algunos ejemplos:
+% si preguntamos quién atiende los lunes a las 14, son dodain, leoC y vale
+% si preguntamos quién atiende los sábados a las 18, son juanC y vale
+% si preguntamos si juanFdS atiende los jueves a las 11, nos debe decir que sí.
+% si preguntamos qué días a las 10 atiende vale, nos debe decir los lunes, miércoles y viernes.
+%
+% El predicado debe ser inversible para relacionar personas y días.
+quienAtiende(Persona, Dia, HorarioPuntual):-
+  atiende(Persona, Dia, HorarioInicio, HorarioFinal),
+  between(HorarioInicio, HorarioFinal, HorarioPuntual).
 
+% Punto 3: Forever alone (2 puntos)
+% Definir un predicado que permita saber si una persona en un día y horario 
+% determinado está atendiendo ella sola. En este predicado debe utilizar not/1, 
+% y debe ser inversible para relacionar personas.
+foreverAlone(Persona, Dia, HorarioPuntual):-
+  quienAtiende(Persona, Dia, HorarioPuntual),
+  not((quienAtiende(OtraPersona, Dia, HorarioPuntual), Persona \= OtraPersona)).
 
-%atiendenEseDia(Dia, Personas) :-
- %   findall(Persona, atiende(Persona, dia(Dia, _, _)), Personas).
-
+% Punto 4: posibilidades de atención (3 puntos / 1 punto)
+% Dado un día, queremos relacionar qué personas podrían estar atendiendo el kiosko
+% en algún momento de ese día.
 posibilidadesAtencion(Dia, Personas):-
-    findall(Persona, distinct(Persona, atiendeEn(Persona, Dia, _)), PersonasPosibles),
-    combinar(PersonasPosibles, Personas).
-  
-  combinar([], []).
-  combinar([Persona|PersonasPosibles], [Persona|Personas]):-combinar(PersonasPosibles, Personas).
-  combinar([_|PersonasPosibles], Personas):-combinar(PersonasPosibles, Personas).
+  findall(Persona, distinct(Persona, quienAtiende(Persona, Dia, _)), PersonasPosibles),
+  combinar(PersonasPosibles, Personas).
 
+combinar([], []).
+combinar([Persona|PersonasPosibles], [Persona|Personas]):-combinar(PersonasPosibles, Personas).
+combinar([_|PersonasPosibles], Personas):-combinar(PersonasPosibles, Personas).
+
+% Qué conceptos en conjunto resuelven este requerimiento
+% - findall como herramienta para poder generar un conjunto de soluciones que satisfacen un predicado
+% - mecanismo de backtracking de Prolog permite encontrar todas las soluciones posibles
+
+% Punto 5: ventas / suertudas (4 puntos)
+% En el kiosko tenemos por el momento tres ventas posibles:
+% - golosinas, en cuyo caso registramos el valor en plata
+% - cigarrillos, de los cuales registramos todas las marcas de cigarrillos que se vendieron (ej: Marlboro y Particulares)
+% - bebidas, en cuyo caso registramos si son alcohólicas y la cantidad
+% 
+% Queremos agregar las siguientes cláusulas:
+% dodain hizo las siguientes ventas el lunes 10 de agosto: golosinas por $ 1200, cigarrillos Jockey, golosinas por $ 50
 venta(dodain, fecha(10, 8), [golosinas(1200), cigarrillos(jockey), golosinas(50)]).
 % dodain hizo las siguientes ventas el miércoles 12 de agosto: 8 bebidas alcohólicas, 
 % 1 bebida no-alcohólica, golosinas por $ 10
@@ -61,3 +96,5 @@ ventaImportante(golosinas(Precio)):-Precio > 100.
 ventaImportante(cigarrillos(Marcas)):-length(Marcas, Cantidad), Cantidad > 2.
 ventaImportante(bebidas(true, _)).
 ventaImportante(bebidas(_, Cantidad)):-Cantidad > 5.
+
+% Tests
