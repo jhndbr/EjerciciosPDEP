@@ -1,4 +1,6 @@
+import lugares.*
 class Mounstruo{
+	const ataquesRealizados =#{}
 	const zonasAtacadas =#{}
 	var vitalida
 	method velocidad()
@@ -7,10 +9,7 @@ class Mounstruo{
 	}
 	//por practicidad tomo la fecha como un anio asi compraro si fue anios atras atacado
 	method esPatetico(){
-		return self.atacoZonaDestruida().size()>0
-	}
-	method atacoZonaDestruida(){
-		return zonasAtacadas.filter({zona=>zona.estabaDestruidaAntesDelultimoAtaque()})
+		return ataquesRealizados.all({ataque=>zonasAtacadas.any({zona=>zona.estabaDestruidaAntes(ataque.fechaAtaque())})})
 	}
 }
 

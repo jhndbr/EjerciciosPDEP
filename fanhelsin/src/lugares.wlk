@@ -1,3 +1,4 @@
+import example.*
 class Lugares{
 	const ataques =#{}
 	var property diaDestruccion
@@ -8,20 +9,20 @@ class Lugares{
 	}
 	
 	method fueDestruido(ataque){
+		diaDestruccion = ataque.fechaAtaque()
 		return self.resistencia() < ataque.nivelsDevastacion()
+		
 	}
 	method fechasDeAtaque(){
 		return ataques.map({ataque=>ataque.fechaAtaque()})
 	}
 	
-	method estabaDestruidaAntesDelultimoAtaque(){
-		return ataques.fold(self.fechasDeAtaque().head(),{ataque=>})
+	method estabaDestruidaAntes(fecha){
+		return diaDestruccion<fecha
 	}
+	
 	method recibirAtaque(ataque){
 		ataques.add(ataque)
-		if (self.fueDestruido(ataque)){
-			self.diaDestruccion(ataque.fechaAtaque())
-		}
 	}
 }
 
