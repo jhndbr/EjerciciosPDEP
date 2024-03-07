@@ -22,8 +22,11 @@ class Lugares{
 	}
 	
 	method recibirAtaque(ataque){
-		ataques.add(ataque)
+			self.PuedeSerAtacado(ataque)
+			ataques.add(ataque)
+		
 	}
+	method PuedeSerAtacado(ataque)
 }
 
 class Aldea inherits Lugares{
@@ -31,16 +34,44 @@ class Aldea inherits Lugares{
 	override method resistencia(){
 		return casas.sum({casa=>casa.resistenciaCasa()})
 	}
+	override method PuedeSerAtacado(ataque){
+		if(not(ataque.ningunoPatetico())) {
+			self.error("hay un patetico")
+		}
+	}
 	
 }
 class Castillo inherits Lugares{
 	var resistenciaCastillo
+	var guardias
 	const resistenciaBase = 3000
 	override method resistencia(){
+		if (guardias.CantidadDeGuardias()>0){
+			return self.resistenciaSinGuardias()+ guardias.resistenciaGuardias()
+		}else {
+			return self.resistenciaSinGuardias()
+		}
+	}
+	override method PuedeSerAtacado(ataque){
+		if(not(ataque.peligrosidadMayorA(256))) {
+			self.error("hay un patetico")
+		}
+	}
+	 method resistenciaSinGuardias(){
 		return resistenciaCastillo + resistenciaBase
 	}
+	
 }
-
+class Guardias{
+	var cantidadDeGuardias
+	const plusMago
+	const valorEstructura = 20
+	method CantidadDeGuardias()=cantidadDeGuardias
+	
+	method resistenciaGuardias(){
+		return plusMago * cantidadDeGuardias.size() + valorEstructura
+	}
+}
 
 class Ataque {
 	const fecha 
@@ -56,7 +87,7 @@ class Ataque {
 		return self.mounstruosMasMalos().size()
 	}
 	method mounstruosMasMalos() {
-		return mounstruos.filter({mounstruo => mounstruo.esMasMalo()})
+		return mounstruos.filter({mounstruo => mounstruo.esMalo()})
 	}
 	method AtaqueSerio(unAtaque){
 		return unAtaque.cantidadMountruosMasMalos()>3
@@ -64,7 +95,12 @@ class Ataque {
 	method nivelsDevastacion(){
 		return mounstruos.sum({mounstruo=>mounstruo.peligrosidad()})
 	}
-	
+	method ningunoPatetico(){
+		return mounstruos.all({mousntruo=>not(mousntruo.esPatetico())})
+	}
+	method peligrosidadMayorA(numero){
+		return mounstruos.all({mousntruo=>mousntruo.peligrosidad()>numero})
+	}
 	
 }
 
